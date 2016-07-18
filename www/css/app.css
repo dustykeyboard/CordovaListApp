@@ -1,0 +1,289 @@
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+
+/* Windows Phone Viewport */
+@media all and (orientation:portrait) { 
+    @-ms-viewport { 
+        width: 320px;
+        user-zoom: fixed;
+        max-zoom: 1;
+        min-zoom: 1;
+    }
+}
+
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+    overflow: hidden;
+    -ms-content-zooming: none;
+    -ms-touch-action: none;
+    margin: 0;
+    font-size: 1em;
+    line-height: 1em;
+    font-family: "San Francisco","Roboto","Segoe UI","Helvetica Neue","Lucida Grande",sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: #777;
+    background: #f8f8f8;
+}
+@media (max-width: 20em) {
+    body {font-size: .8em;}
+}
+@media (max-width: 14em) {
+    body {font-size: .7em;}
+}
+
+footer {
+	display: block;
+	max-width: 32em;
+	margin: .5em auto;
+	padding: 1em;
+}
+
+
+.actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1em;
+    text-align: center;
+    background: rgba(248, 248, 248, .5);
+    background: linear-gradient(to bottom, rgba(248,248,248,0.5) 0%,rgba(248,248,248,1) 50%,rgba(248,248,248,1) 100%);
+}
+[class^="actions__btn"],
+[class*=" actions__btn"] {
+    display: inline-block;
+    font-size: 2em;
+    width: 2em;
+    height: 2em;
+    margin-left: .2em;
+    text-align: center;
+    line-height: 2em;
+    color: #fff;
+    background-color: #777;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 1em;
+    border-radius: 50%;
+    box-shadow: 1px 2px 3px #888;
+    text-indent: 200%;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: .3s;
+}
+.actions__btn--primary {
+    background-color: #087;
+}
+.actions__btn--active {
+    background-color: #c87;
+    transform: rotateY(180deg);
+}
+.actions__btn--danger {
+    background-color: #922;
+}
+.icon-camera { background-image: url(../img/camera.svg); }
+.icon-add { background-image: url(../img/add.svg); }
+.icon-delete { background-image: url(../img/delete.svg); }
+.icon-done { background-image: url(../img/done.svg); }
+.icon-share { background-image: url(../img/share.svg); }
+
+
+.list {
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+.list__title {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    font-size: 1em;
+    margin: 0;
+    padding: 1em;
+    color: #fff;
+    background: #777;
+    text-transform: uppercase;
+    z-index: 1;
+    box-shadow: 0 0 1em #f8f8f8;
+}
+[class^="list__tasks"],
+[class*=" list__tasks"] {
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-top: 3em;
+    padding-bottom: 6em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: .3s;
+}
+.list__tasks--completed {
+    left: 100%;
+}
+.list__completed .list__tasks {
+    left: -100%;
+}
+.list__completed .list__tasks--completed {
+    left: 0;
+}
+
+
+.task {
+    padding: 1em 1em 1em 4em;
+    position: relative;
+    margin: 1px 0 0;
+    background: #fff;
+    border-bottom: 1px solid #777;
+}
+.task__hasPicture {
+    padding-right: 4em;
+}
+.task__title {
+    font-size: 1.2em;
+    margin: 0;
+    line-height: 1em;
+}
+[class^="task__checkbox"] {
+    content: '';
+    position: absolute;
+    font-size: 1em;
+    top: 1em;
+    left: 1em;
+    width: 2em;
+    text-align: center;
+    height: 2em;
+    line-height: 2em;
+    background-color: #ddd;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 1em;
+    color: #087;
+    font-weight: bold;
+    box-shadow: 1px 2px 3px #888 inset;
+}
+.task__checkbox--completed {
+    background-image: url(../img/completed.svg);
+}
+.task__description {
+    font-size: .8em;
+    min-height: 1em;
+    white-space: pre-wrap;
+}
+.task__picture {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 2em;
+}
+.task__picture img {
+    max-width: 100%;
+}
+
+
+.modal__title {
+    font-size: 1em;
+    margin: 0;
+    padding: 1em;
+}
+.modal__element {
+    padding: 1em;
+    position: relative;
+    border-top: 1px solid #ccc;
+    background: #fff;
+}
+.modal__element label {
+    display: block;
+    font-size: .8em;
+    position: absolute;
+    top: .75em;
+    left: 1.25em;
+}
+.modal__input {
+    padding: 0;
+}
+.modal__input input {
+    font-size: 1em;
+    font-family: "San Francisco","Roboto","Segoe UI","Helvetica Neue","Lucida Grande",sans-serif;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 2.1em 1em 1em 1em;
+    border: 0;
+}
+.modal__textarea {
+    padding: 0;
+}
+.modal__textarea textarea {
+    font-size: 1em;
+    font-family: "San Francisco","Roboto","Segoe UI","Helvetica Neue","Lucida Grande",sans-serif;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 2.1em 1em 1em 1em;
+    min-height: 6em;
+    border: 0;
+}
+.modal__picture {
+    padding: 1em;
+}
+.modal__picture img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+
+
+/* ANIMATIONS */
+.task.ng-leave {
+  animation: animate-task__leave .3s;
+}
+@keyframes animate-task__leave {
+    0% {
+        transform: scale(1);
+        height: auto;
+        display: block;
+    }
+    100% {
+        transform: scale(0);
+        height: 0;
+        display: none;
+    }
+}
+
+.list__tasks.ng-enter,
+.list__tasks--completed.ng-enter {
+    animation: fadein .3s;
+}
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.list__tasks.ng-leave,
+.list__tasks--completed.ng-leave {
+  animation: fadeout .3s;
+}
+@keyframes fadeout {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

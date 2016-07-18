@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="tasks">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+        <allow-navigation href="http://*/*" />
+
+        <title>Tasks</title>
+
+        <link rel="stylesheet" type="text/css" href="css/app.css" />
+        
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/angular.min.js"></script>
+        <script type="text/javascript" src="js/angular-animate.min.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+    </head>
+    <body ng-controller="TasksCtrl" ng-init="load()">
+
+
+        <div class="list {{ viewCompleted ? 'list__completed ' : 'list__tasks' }}" ng-hide="editingTask" ng-cloak>
+            <h1 class="list__title">{{ viewCompleted ? 'Completed ' : 'Tasks' }}</h1>
+            
+            <div class="list__tasks" ng-if="!viewCompleted" ng-animate="'animate'">
+                <div ng-repeat="task in tasks" class="task {{ task.picture ? 'task__hasPicture' : '' }}" ng-if="!task.completed" ng-click="editTask( $index )" ng-animate="'animate'">
+                    <h2 class="task__title">{{ task.title }}</h2>
+                    <div class="task__checkbox{{ task.completed ? '--completed' : '' }}" ng-click="completeTask( $index ); $event.stopPropagation();"></div>
+                    <div class="task__description">{{ task.description }}</div>
+                    <div class="task__picture" ng-show="{{ task.picture }}"><img src="{{ task.picture }}" /></div>
+                </div>
+            </div>
+            
+            <div class="list__tasks--completed" ng-if="viewCompleted" ng-animate="'animate'">
+                <div ng-repeat="task in tasks" class="task {{ task.picture ? 'task__hasPicture' : '' }}" ng-if="task.completed" ng-click="editTask( $index )" ng-animate="'animate'">
+                    <h2 class="task__title">{{ task.title }}</h2>
+                    <div class="task__checkbox{{ task.completed ? '--completed' : '' }}" ng-click="completeTask( $index ); $event.stopPropagation();"></div>
+                    <div class="task__description">{{ task.description }}</div>
+                    <div class="task__picture" ng-show="{{ task.picture }}"><img src="{{ task.picture }}" /></div>
+                </div>
+            </div>
+            
+            <div class="actions">
+                <span class="actions__btn--primary icon-add" ng-click="newTask()">New Task</span>
+                <span class="actions__btn icon-share" ng-hide="viewCompleted" ng-click="shareTasks()">Share Tasks</span>
+                <span class="actions__btn{{ viewCompleted ? '--active' : '' }} icon-done " ng-click="toggleView()">Show Completed</span>
+            </div>
+        </div>
+
+
+        <form ng-show="editingTask" class="modal" ng-cloak>
+            <h1 class="modal__title">Edit Task</h1>
+            <div class="modal__element modal__input">
+                <label for="title">Title</label>
+                <input type="text" name="title" ng-model="editingTask.title" ng-model-instant />
+            </div>
+            <div class="modal__element modal__textarea">
+                <label for="description">Description</label>
+                <textarea type="text" name="description" ng-model="editingTask.description" ng-model-instant></textarea>
+            </div>
+            <div class="modal__element modal__picture" ng-show="editingTask.picture">
+                <img src="{{ editingTask.picture }}" />
+            </div>
+            <div class="actions">
+                <span class="actions__btn--primary icon-done" ng-show="editingTask.title.length" ng-click="closeTask()">Close Task</span>
+                <span class="actions__btn{{ cameraActive ? '--active' : '' }} icon-camera " ng-click="getPicture()">Get Picture</span>
+                <span class="actions__btn--danger icon-delete" ng-click="deleteTask()">Delete Task</span>
+            </div>
+        </form>
+
+
+    </body>
+</html>
